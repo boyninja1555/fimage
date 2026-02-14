@@ -1,0 +1,50 @@
+plugins {
+    id "java"
+    id "jvm-test-suite"
+    id "maven-publish"
+}
+
+group = "com.boyninja1555"
+version = "0.0.1"
+
+repositories {
+    mavenCentral()
+}
+
+dependencies {
+    implementation "org.jetbrains:annotations:26.0.2-1"
+}
+
+java {
+    withJavadocJar()
+    withSourcesJar()
+}
+
+testing {
+    suites {
+        test(JvmTestSuite) {
+            useJUnitJupiter()
+
+            dependencies {
+                implementation "org.junit.jupiter:junit-jupiter:5.10.2"
+            }
+        }
+    }
+}
+
+publishing {
+    publications {
+        mavenJava(MavenPublication) {
+            from components.java
+            artifactId = "fimage"
+            groupId = group
+            version = version
+
+            pom {
+                name = "fImage"
+                description = "The default, lightweight library for .fimg (fImage) files"
+                url = "https://github.com/boyninja1555/fimage"
+            }
+        }
+    }
+}
