@@ -37,6 +37,71 @@ dependencies {
 }
 ```
 
+### Examples
+
+2x2 checker pattern
+
+```java
+FImage image = new FImage(
+        new FImageFlags(false),  // (alphaMode:false)
+        2                        // Width of 2 pixels
+);
+
+RGBA black = new RGBA(0f, 0f, 0f);
+RGBA white = new RGBA(1f, 1f, 1f);
+image.setPixelAt(0, 0, black);  // Top-left (black)
+image.setPixelAt(1, 0, white);  // Top-right (white)
+image.setPixelAt(0, 1, white);  // Bottom-left (black)
+image.setPixelAt(1, 1, black);  // Bottom-right (white)
+```
+
+2x2 checker pattern (saved to file)
+
+```java
+FImage image = new FImage(
+        new FImageFlags(false),  // (alphaMode:false)
+        2                        // Width of 2 pixels
+);
+
+RGBA black = new RGBA(0f, 0f, 0f);
+RGBA white = new RGBA(1f, 1f, 1f);
+image.setPixelAt(0, 0, black);  // Top-left (black)
+image.setPixelAt(1, 0, white);  // Top-right (white)
+image.setPixelAt(0, 1, white);  // Bottom-left (black)
+image.setPixelAt(1, 1, black);  // Bottom-right (white)
+image.save(new File("checker.fimg"));
+```
+
+1x1 green pixel with `0.5` alpha (50%)
+
+```java
+// `alphaMode` must be set to `true` so the pixels' alpha values aren't assumed to be 1.0 (100%) when the image is loaded
+FImage image = new FImage(
+        new FImageFlags(true),  // (alphaMode:true)
+        1                       // Width of 1 pixel
+);
+
+image.setPixelAt(0, 0, RGBA.HALF_GREEN);  // Preset color for green with `0.5` alpha (50%)
+```
+
+Loading from file
+
+```java
+FImage image = FImage.fromFile(new File("image.fimg"));
+
+// ...
+```
+
+Loading from file to existing image
+
+```java
+// ...
+
+image.load(new File("image.fimg"));
+
+// ...
+```
+
 ### Contributing
 
 As a near unknown file format, we accept most contributions. Note that this library is not meant for tools like converters, but for easy reading/writing. We do not accept code that doesn't directly change the file format or modifies how reading/writing works. Example: A PNG-to-fImage converter pull request will be denied, but edits to the file format in a pull request will be accepted.
