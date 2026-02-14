@@ -27,8 +27,13 @@ Gradle (Groovy)
 
 ```groovy
 repositories {
+    mavenCentral()
     maven {
         url = uri("https://maven.pkg.github.com/boyninja1555/fimage")
+        credentials {
+            username = "YOUR_GITHUB_USERNAME"
+            password = "YOUR_GITHUB_CLASSIC_TOKEN"
+        }
     }
 }
 
