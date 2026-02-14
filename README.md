@@ -42,33 +42,32 @@ dependencies {
 2x2 checker pattern
 
 ```java
-FImage image = new FImage(
-        new FImageFlags(false),  // (alphaMode:false)
-        2                        // Width of 2 pixels
-);
-
 RGBA black = new RGBA(0f, 0f, 0f);
 RGBA white = new RGBA(1f, 1f, 1f);
-image.setPixelAt(0, 0, black);  // Top-left (black)
-image.setPixelAt(1, 0, white);  // Top-right (white)
-image.setPixelAt(0, 1, white);  // Bottom-left (black)
-image.setPixelAt(1, 1, black);  // Bottom-right (white)
+FImage image = new FImage(
+        new FImageFlags(false),  // (alphaMode:false)
+        2,                       // Width of 2 pixels
+        List.of(
+                black, white,
+                white, black
+        )
+);
 ```
 
 2x2 checker pattern (saved to file)
 
 ```java
-FImage image = new FImage(
-        new FImageFlags(false),  // (alphaMode:false)
-        2                        // Width of 2 pixels
-);
-
 RGBA black = new RGBA(0f, 0f, 0f);
 RGBA white = new RGBA(1f, 1f, 1f);
-image.setPixelAt(0, 0, black);  // Top-left (black)
-image.setPixelAt(1, 0, white);  // Top-right (white)
-image.setPixelAt(0, 1, white);  // Bottom-left (black)
-image.setPixelAt(1, 1, black);  // Bottom-right (white)
+FImage image = new FImage(
+        new FImageFlags(false),  // (alphaMode:false)
+        2,                       // Width of 2 pixels
+        List.of(
+                black, white,
+                white, black
+        )
+);
+
 image.save(new File("checker.fimg"));
 ```
 
@@ -78,10 +77,9 @@ image.save(new File("checker.fimg"));
 // `alphaMode` must be set to `true` so the pixels' alpha values aren't assumed to be 1.0 (100%) when the image is loaded
 FImage image = new FImage(
         new FImageFlags(true),  // (alphaMode:true)
-        1                       // Width of 1 pixel
+        1,                      // Width of 1 pixel
+        List.of(RGBA.HALF_GREEN)  // Preset color for green with `0.5` alpha (50%)
 );
-
-image.setPixelAt(0, 0, RGBA.HALF_GREEN);  // Preset color for green with `0.5` alpha (50%)
 ```
 
 Loading from file
@@ -98,6 +96,16 @@ Loading from file to existing image
 // ...
 
 image.load(new File("image.fimg"));
+
+// ...
+```
+
+Editing pixel on existing image
+
+```java
+// ...
+
+image.setPixelAt(46, 302, RGBA.TRANSPARENT);  // When `alphaMode` is set to `false`, this will appear black
 
 // ...
 ```

@@ -32,18 +32,6 @@ public class FImage {
         width(width);
     }
 
-    /**
-     * Creates a new image state with no pixels
-     * @param flags Image flags
-     * @param width Width (used to infer height)
-     * @throws FImageResizeException Contains reason why the image could not be created with that width
-     */
-    public FImage(@NotNull FImageFlags flags, int width) throws FImageResizeException {
-        this.flags = flags;
-        this.pixels = new ArrayList<>();
-        width(width);
-    }
-
     // Getters / setters
 
     public FImageFlags flags() {
@@ -111,7 +99,6 @@ public class FImage {
     }
 
     public void setPixelAt(int x, int y, RGBA color) throws PixelLocatingException {
-        // This is kinda useless, but I didn't wanna somehow move the exception throwers or whatever
         RGBA original = getPixelAt(x, y);
 
         if (original.equals(color))
