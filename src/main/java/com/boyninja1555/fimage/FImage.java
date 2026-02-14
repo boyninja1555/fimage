@@ -19,9 +19,28 @@ public class FImage {
     private int width;
     private List<RGBA> pixels;
 
+    /**
+     * Creates a new image state with preset pixels
+     * @param flags Image flags
+     * @param width Width (used to infer height)
+     * @param pixels Preset pixels
+     * @throws FImageResizeException Contains reason why the image could not be created with that width
+     */
     public FImage(@NotNull FImageFlags flags, int width, @NotNull List<RGBA> pixels) throws FImageResizeException {
         this.flags = flags;
         this.pixels = new ArrayList<>(pixels);
+        width(width);
+    }
+
+    /**
+     * Creates a new image state with no pixels
+     * @param flags Image flags
+     * @param width Width (used to infer height)
+     * @throws FImageResizeException Contains reason why the image could not be created with that width
+     */
+    public FImage(@NotNull FImageFlags flags, int width) throws FImageResizeException {
+        this.flags = flags;
+        this.pixels = new ArrayList<>();
         width(width);
     }
 
