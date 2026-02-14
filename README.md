@@ -1,6 +1,6 @@
 <div align="center">
     <h1>fImage</h1>
-    <p>The default, lightweight library for `.fimg` (fImage) files</p>
+    <p>The default, lightweight library for <code>.fimg</code> (fImage) files</p>
 </div>
 
 ---
