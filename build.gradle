@@ -47,4 +47,15 @@ publishing {
             }
         }
     }
+
+    repositories {
+        maven {
+            name = "github"
+            url = uri("https://maven.pkg.github.com/boyninja1555/fimage")
+            credentials {
+                username = project.findProperty("gpr.user") ?: System.getenv("GPR_USER")
+                password = project.findProperty("gpr.token") ?: System.getenv("GPR_TOKEN")
+            }
+        }
+    }
 }
